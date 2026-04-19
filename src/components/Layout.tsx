@@ -5,12 +5,9 @@ import {
   ShoppingCart, 
   Printer, 
   Database, 
-  Users, 
   LogOut,
   Menu,
   X,
-  Moon,
-  Sun,
   ChevronDown,
   BarChart2,
   MousePointer2,
@@ -25,11 +22,11 @@ import {
   User
 } from 'lucide-react';
 import { useTheme } from './ThemeContext';
+import { ThemeToggle } from './ThemeToggle';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 
 const Layout = () => {
-  const { theme, toggleTheme } = useTheme();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({
     master: false,
@@ -173,7 +170,7 @@ const Layout = () => {
                               isActive(subItem.path) ? "text-white font-bold" : "text-gray-500"
                             )}
                           >
-                            <subItem.icon size={14} />
+                            {subItem.icon ? <subItem.icon size={14} /> : <FileText size={14} />}
                             <span>{subItem.title}</span>
                           </Link>
                         ))}
@@ -193,7 +190,7 @@ const Layout = () => {
                         : "text-gray-400 hover:text-white hover:bg-gray-900"
                     )}
                   >
-                    <item.icon size={18} />
+                    {item.icon ? <item.icon size={18} /> : <Database size={18} />}
                     {isSidebarOpen && <span>{item.title}</span>}
                   </Link>
                 ))
@@ -226,12 +223,7 @@ const Layout = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <button 
-              onClick={toggleTheme}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-none transition-colors"
-            >
-              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-            </button>
+            <ThemeToggle />
             <div className="w-8 h-8 bg-gray-200 dark:bg-gray-800 rounded-none" />
           </div>
         </header>

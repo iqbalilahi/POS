@@ -8,6 +8,7 @@ import Products from '@/pages/Master/Products';
 import Customers from '@/pages/Master/Customers';
 import ProfitLoss from '@/pages/Accounting/ProfitLoss';
 import InventoryValuation from '@/pages/Accounting/InventoryValuation';
+import SalesReport from '@/pages/Accounting/SalesReport';
 import PlaceholderPage from '@/pages/PlaceholderPage';
 
 export default function App() {
@@ -43,14 +44,14 @@ export default function App() {
               <Route path="stock-opname" element={<PlaceholderPage />} />
               <Route path="stock-transfers" element={<PlaceholderPage />} />
               <Route path="orders" element={<PlaceholderPage />} />
-              <Route path="sales" element={<PlaceholderPage />} />
-              <Route path="production" element={<PlaceholderPage />} />
+              <Route path="sales" element={<SalesReport />} />
+              <Route path="production" element={<PrintingOrder />} />
             </Route>
 
             <Route path="accounting">
               <Route path="profit-loss" element={<ProfitLoss />} />
               <Route path="inventory" element={<InventoryValuation />} />
-              <Route path="sales-report" element={<Dashboard />} />
+              <Route path="sales-report" element={<SalesReport />} />
               <Route path="shifts" element={<PlaceholderPage />} />
               <Route path="cash-flow" element={<PlaceholderPage />} />
               <Route path="vouchers" element={<PlaceholderPage />} />
