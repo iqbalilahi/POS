@@ -9,6 +9,7 @@ import Customers from '@/pages/Master/Customers';
 import ProfitLoss from '@/pages/Accounting/ProfitLoss';
 import InventoryValuation from '@/pages/Accounting/InventoryValuation';
 import SalesReport from '@/pages/Accounting/SalesReport';
+import OfferingLetter from '@/pages/OfferingLetter';
 import PlaceholderPage from '@/pages/PlaceholderPage';
 
 export default function App() {
@@ -63,6 +64,10 @@ export default function App() {
               <Route path="groups" element={<PlaceholderPage />} />
               <Route path="menus" element={<PlaceholderPage />} />
               <Route path="group-menus" element={<PlaceholderPage />} />
+            </Route>
+
+            <Route path="commercial">
+              <Route path="offering-letter" element={<OfferingLetter />} />
             </Route>
           </Route>
         </Routes>

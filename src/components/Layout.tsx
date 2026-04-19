@@ -33,6 +33,7 @@ const Layout = () => {
     queue: false,
     transactions: false,
     accounting: false,
+    commercial: false,
     users: false,
   });
   const location = useLocation();
@@ -100,6 +101,14 @@ const Layout = () => {
         { title: 'Payment Methods', path: '/accounting/payments', icon: FileText },
         { title: 'Profit & Loss', path: '/accounting/profit-loss', icon: BarChart2 },
         { title: 'Inventory Value', path: '/accounting/inventory', icon: Package },
+      ]
+    },
+    {
+      id: 'commercial',
+      title: 'Commercial',
+      icon: FileText,
+      items: [
+        { title: 'Offering Letter', path: '/commercial/offering-letter', icon: FileText },
       ]
     },
     {
