@@ -49,8 +49,8 @@ export const Receipt = forwardRef<HTMLDivElement, ReceiptProps>(({
               <span>{item.product_name}</span>
             </div>
             <div className="flex justify-between text-[11px]">
-              <span>{item.quantity} x {formatCurrency(item.price)}</span>
-              <span>{formatCurrency(item.total)}</span>
+              <span>{item.qty} x {formatCurrency(item.unit_price)}</span>
+              <span>{formatCurrency(item.subtotal)}</span>
             </div>
             {item.notes && <p className="text-[10px] italic">- {item.notes}</p>}
           </div>

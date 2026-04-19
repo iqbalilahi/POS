@@ -1,77 +1,134 @@
-export interface Product {
-  id: string;
+export interface BaseEntity {
+  id: number;
+  created_at: string;
+  created_by?: string;
+  updated_at: string;
+  updated_by?: string;
+  is_active: boolean;
+}
+
+export interface Branch extends BaseEntity {
+  company_id: number;
+  branch_code: string;
+  branch_name: string;
+  branch_type?: string;
+  address?: string;
+  city?: string;
+  is_main_branch: boolean;
+}
+
+export interface Category extends BaseEntity {
+  company_id: number;
   name: string;
-  category_id: string;
+  code?: string;
+  sort: number;
+}
+
+export interface Unit extends BaseEntity {
+  company_id: number;
+  name: string;
+  symbol: string;
+}
+
+export interface Product extends BaseEntity {
+  company_id: number;
+  category_id?: number;
   sku: string;
   barcode?: string;
-  type: 'printing' | 'retail';
-  unit_id: string;
-  base_price: number; // HPP
+  name: string;
+  description?: string;
+  product_type: 'sell' | 'service'; // sell for retail, service for printing
+  unit_id?: number;
+  buy_price: number;
   sell_price: number;
-  stock: number;
+  track_stock: boolean;
+  min_stock: number;
+  image_url?: string;
 }
 
-export interface Customer {
-  id: string;
+export interface Customer extends BaseEntity {
+  company_id: number;
+  branch_id?: number;
+  customer_code?: string;
   name: string;
-  phone: string;
+  phone?: string;
   email?: string;
   address?: string;
-  debt_limit: number;
+  customer_type: string;
+  points: number;
+  total_spent: number;
 }
 
-export interface OrderItem {
-  id: string;
-  product_id: string;
+export interface SaleItem {
+  id: number;
+  sale_id: number;
+  product_id: number;
   product_name: string;
-  quantity: number;
-  price: number;
+  qty: number;
+  unit_price: number;
   discount: number;
-  total: number;
+  subtotal: number;
   notes?: string;
-  is_printing: boolean;
 }
 
-export interface Order {
-  id: string;
-  customer_id: string;
-  customer_name: string;
-  total_amount: number;
-  paid_amount: number;
-  change_amount: number;
-  payment_method_id: string;
-  status: 'pending' | 'processing' | 'completed' | 'cancelled';
-  items: OrderItem[];
-  created_at: string;
-  branch_id: string;
+export type OrderItem = SaleItem;
+
+export interface Sale extends BaseEntity {
+  company_id: number;
+  branch_id: number;
+  sale_number: string;
+  customer_id?: number;
+  customer_name?: string;
+  cashier_id: number;
+  grand_total: number;
+  status: string;
+  payment_method: string;
 }
 
-export interface Branch {
-  id: string;
-  name: string;
-  address: string;
-  is_main: boolean;
+export interface ProductionJob extends BaseEntity {
+  order_id: number;
+  job_number: string;
+  operator_name?: string;
+  status: 'pending' | 'processing' | 'done' | 'qc';
+  priority: number;
 }
 
 export interface ProfitLossData {
   revenue: number;
-  cogs: number; // HPP
+  cogs: number;
   gross_profit: number;
   expenses: number;
   net_profit: number;
 }
 
-export interface SalesReportItem {
-  date: string;
-  count: number;
-  total: number;
-}
-
 export interface InventoryValuationItem {
-  product_id: string;
+  product_id: number;
   name: string;
   sku: string;
   stock: number;
   base_price: number;
   total_value: number;
+}
+
+export interface Params {
+  page?: number;
+  per_page?: number;
+  search?: string;
+  order?: string | string[];
+  direction?: string | string[];
+  between?: string;
+  filter?: string;
+  filterAnd?: string;
+  filterExact?: string;
+  filterAndNegative?: string;
+}
+
+export interface Pagination {
+  data: any[];
+  total: number;
+  per_page: number;
+  current_page: number;
+  total_pages: number;
+  from: number;
+  to: number;
 }
