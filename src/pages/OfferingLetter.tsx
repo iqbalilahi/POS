@@ -8,7 +8,7 @@ const OfferingLetter = () => {
   
   // State for feature toggles
   const [includePrinting, setIncludePrinting] = useState(true);
-  const [includeAI, setIncludeAI] = useState(true);
+  const [includeAI, setIncludeAI] = useState(false);
 
   // Pricing Logic
   const basePrice = 15000000;
