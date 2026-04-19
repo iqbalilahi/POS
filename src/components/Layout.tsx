@@ -8,6 +8,7 @@ import {
   LogOut,
   Menu,
   X,
+  ClipboardList,
   ChevronDown,
   BarChart2,
   MousePointer2,
@@ -109,6 +110,7 @@ const Layout = () => {
       icon: FileText,
       items: [
         { title: 'Offering Letter', path: '/commercial/offering-letter', icon: FileText },
+        { title: 'Business Process', path: '/commercial/business-process', icon: ClipboardList },
       ]
     },
     {

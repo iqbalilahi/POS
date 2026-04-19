@@ -6,6 +6,7 @@ import POS from '@/pages/POS';
 import PrintingOrder from '@/pages/PrintingOrder';
 import Products from '@/pages/Master/Products';
 import Customers from '@/pages/Master/Customers';
+import BusinessProcess from '@/pages/BusinessProcess';
 import ProfitLoss from '@/pages/Accounting/ProfitLoss';
 import InventoryValuation from '@/pages/Accounting/InventoryValuation';
 import SalesReport from '@/pages/Accounting/SalesReport';
@@ -68,6 +69,7 @@ export default function App() {
 
             <Route path="commercial">
               <Route path="offering-letter" element={<OfferingLetter />} />
+              <Route path="business-process" element={<BusinessProcess />} />
             </Route>
           </Route>
         </Routes>
