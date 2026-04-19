@@ -1,11 +1,22 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import { Printer, Download, Mail, Phone, MapPin, CheckCircle2 } from 'lucide-react';
+import { Printer, Mail, Phone, MapPin, CheckCircle2, CheckSquare, Square, Info } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 
 const OfferingLetter = () => {
   const printRef = useRef<HTMLDivElement>(null);
   
+  // State for feature toggles
+  const [includePrinting, setIncludePrinting] = useState(true);
+  const [includeAI, setIncludeAI] = useState(true);
+
+  // Pricing Logic
+  const basePrice = 15000000;
+  const printingAddonPrice = 5000000;
+  const aiAddonPrice = 5000000;
+
+  const totalPrice = basePrice + (includePrinting ? printingAddonPrice : 0) + (includeAI ? aiAddonPrice : 0);
+
   const handlePrint = useReactToPrint({
     contentRef: printRef,
   });
@@ -15,17 +26,43 @@ const OfferingLetter = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center bg-white dark:bg-black p-4 border border-gray-100 dark:border-gray-900 sticky top-0 z-10 shadow-sm">
+      {/* Interactive Controls (Hidden during print) */}
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center bg-white dark:bg-black p-4 border border-gray-100 dark:border-gray-900 sticky top-0 z-10 shadow-sm gap-4">
         <div>
           <h2 className="text-xl font-black italic tracking-tighter">OFFERING LETTER GENERATOR</h2>
           <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">InkPOS Commercial Proposal</p>
         </div>
-        <button 
-          onClick={() => handlePrint()}
-          className="bg-black text-white dark:bg-white dark:text-black px-6 py-3 font-black text-[10px] tracking-widest hover:opacity-80 transition-all uppercase flex items-center gap-2"
-        >
-          <Printer size={14} /> Print Proposal
-        </button>
+        
+        <div className="flex flex-wrap items-center gap-4 border-l-0 lg:border-l border-gray-100 dark:border-gray-800 lg:pl-6">
+           <p className="text-[9px] font-black uppercase text-gray-400 tracking-widest w-full lg:w-auto">Package Config:</p>
+           <button 
+             onClick={() => setIncludePrinting(!includePrinting)}
+             className={`flex items-center gap-2 px-3 py-1.5 border rounded-lg transition-all text-[10px] font-bold uppercase tracking-tighter ${includePrinting ? 'bg-black text-white border-black dark:bg-white dark:text-black' : 'text-gray-400 border-gray-100'}`}
+           >
+             {includePrinting ? <CheckSquare size={14} /> : <Square size={14} />}
+             Printing Engine
+           </button>
+           <button 
+             onClick={() => setIncludeAI(!includeAI)}
+             className={`flex items-center gap-2 px-3 py-1.5 border rounded-lg transition-all text-[10px] font-bold uppercase tracking-tighter ${includeAI ? 'bg-black text-white border-black dark:bg-white dark:text-black' : 'text-gray-400 border-gray-100'}`}
+           >
+             {includeAI ? <CheckSquare size={14} /> : <Square size={14} />}
+             AI Assistance
+           </button>
+        </div>
+
+        <div className="flex items-center gap-4 ml-auto">
+          <div className="text-right">
+            <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Total Price</p>
+            <p className="font-black text-lg tabular-nums">{formatCurrency(totalPrice)}</p>
+          </div>
+          <button 
+            onClick={() => handlePrint()}
+            className="bg-black text-white dark:bg-white dark:text-black px-6 py-3 font-black text-[10px] tracking-widest hover:opacity-80 transition-all uppercase flex items-center gap-2 shadow-lg shadow-black/10"
+          >
+            <Printer size={14} /> Print Proposal
+          </button>
+        </div>
       </div>
 
       <div className="flex justify-center bg-gray-100 dark:bg-gray-950 p-8 min-h-screen overflow-auto">
@@ -90,87 +127,123 @@ const OfferingLetter = () => {
 
           <div className="print:break-before-page pt-10" />
 
-          {/* PAGE 2: Feature Matrix */}
+          {/* PAGE 2: Technical Detailed Menu (Mirroring PDF) */}
           <div className="mb-20">
-             <h2 className="text-lg font-bold border-b-2 border-black pb-2 mb-6 uppercase tracking-widest">PROFIL & FITUR SISTEM</h2>
+             <h2 className="text-lg font-bold border-b-2 border-black pb-2 mb-6 uppercase tracking-widest">DETAIL PENGEMBANGAN APLIKASI</h2>
              <p className="mb-6 text-xs italic text-gray-600">
-               Detail berikut merangkum kapabilitas utama sistem InkPOS yang akan diimplementasikan sesuai kebutuhan workflow operasional Anda.
+               Detail daftar menu di bawah ini merupakan rincian fungsionalitas yang akan dikembangkan dalam sistem InkPOS.
              </p>
 
-             <div className="space-y-8">
-                <section>
-                  <h3 className="font-bold bg-gray-100 p-2 mb-4 border-l-4 border-black">A. MODUL CORE RETAIL & POS</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                     <div className="flex gap-2">
-                        <CheckCircle2 size={16} className="shrink-0 mt-1" />
+             <div className="border border-black overflow-hidden mb-8">
+               <table className="w-full text-[10px] border-collapse">
+                 <thead className="bg-orange-100 font-bold uppercase tracking-widest text-center">
+                   <tr>
+                     <th className="border border-black p-2 w-[5%] text-center">No</th>
+                     <th className="border border-black p-2 w-[25%] text-left">Menu</th>
+                     <th className="border border-black p-2 text-left">Detail Pengembangan Modul</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   {/* SECTION A */}
+                   <tr className="bg-gray-100 font-black">
+                     <td className="border border-black p-2 text-center text-xs">A</td>
+                     <td className="border border-black p-2 text-xs" colSpan={2}>WEB DEVELOPMENT (DASHBOARD & BACKEND)</td>
+                   </tr>
+                   <tr>
+                     <td className="border border-black p-2 text-center align-top">A.1</td>
+                     <td className="border border-black p-2 align-top font-bold">Modul Master Data & Warehouse</td>
+                     <td className="border border-black p-2 space-y-2">
+                       <div>
+                         <p className="font-black bg-gray-50 border-double border-b border-black/10 w-fit">Master Data & Integrasi</p>
+                         <p className="pl-2">- Master Produk (SKU, Harga Beli/Jual, Pajak)</p>
+                         <p className="pl-2">- Master Supplier & CRM Customer</p>
+                         <p className="pl-2">- Master Satuan (UoM) & Gudang</p>
+                         <p className="pl-2">- Migrasi Data dari Excel / Sistem Lama</p>
+                       </div>
+                       {includePrinting && (
                         <div>
-                          <p className="font-bold">Master Inventory</p>
-                          <p className="text-[10px]">Manajemen SKU lengkap dengan tracking stok minimum (Alert stock kabis).</p>
+                          <p className="font-black bg-gray-50 border-double border-b border-black/10 w-fit">Master Antrian Produksi</p>
+                          <p className="pl-2">- Mapping Urutan Produksi (Step Templates)</p>
+                          <p className="pl-2">- Layanan Antrian (Express/Standard)</p>
                         </div>
-                     </div>
-                     <div className="flex gap-2">
-                        <CheckCircle2 size={16} className="shrink-0 mt-1" />
+                       )}
+                     </td>
+                   </tr>
+                   <tr>
+                     <td className="border border-black p-2 text-center align-top">A.2</td>
+                     <td className="border border-black p-2 align-top font-bold">Modul Transaksi & Keuangan</td>
+                     <td className="border border-black p-2 space-y-2">
                         <div>
-                          <p className="font-bold">Multi-Category POS</p>
-                          <p className="text-[10px]">Antarmuka kasir cepat dengan dukungan scanner dan pencarian instan.</p>
-                        </div>
-                     </div>
-                  </div>
-                </section>
+                         <p className="font-black bg-gray-50 border-double border-b border-black/10 w-fit">Point of Sale (POS) & Billing</p>
+                         <p className="pl-2">- Kasir Retail & Printing Order Management</p>
+                         <p className="pl-2">- Penyesuaian Harga & Voucher Diskon</p>
+                         <p className="pl-2">- Pembayaran terintegrasi via Link Web (Invoice)</p>
+                       </div>
+                       <div>
+                         <p className="font-black bg-gray-50 border-double border-b border-black/10 w-fit">Notifikasi & Reporting</p>
+                         <p className="pl-2">- Notifikasi Nota via Email & WhatsApp (Optional)</p>
+                         <p className="pl-2">- Laporan Laba Rugi (P&L) & Stock Opname</p>
+                       </div>
+                     </td>
+                   </tr>
 
-                <section>
-                  <h3 className="font-bold bg-gray-100 p-2 mb-4 border-l-4 border-black">B. MODUL PRINTING & PRODUKSI</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                     <div className="flex gap-2">
-                        <CheckCircle2 size={16} className="shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold">Queue Management</p>
-                          <p className="text-[10px]">Antrian otomatis berdasarkan prioritas pesanan cetak (Normal/Urgent).</p>
-                        </div>
-                     </div>
-                     <div className="flex gap-2">
-                        <CheckCircle2 size={16} className="shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold">Step Templates</p>
-                          <p className="text-[10px]">Instruksi kerja per item pesanan memudahkan operator produksi.</p>
-                        </div>
-                     </div>
-                  </div>
-                </section>
-
-                <section>
-                  <h3 className="font-bold bg-gray-100 p-2 mb-4 border-l-4 border-black">C. ACCOUNTING & REPORTING</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                     <div className="flex gap-2">
-                        <CheckCircle2 size={16} className="shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold">Profit & Loss Dashboard</p>
-                          <p className="text-[10px]">Laporan laba rugi real-time berdasarkan HPP (COGS) dan Penjualan.</p>
-                        </div>
-                     </div>
-                     <div className="flex gap-2">
-                        <CheckCircle2 size={16} className="shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold">Inventory Valuation</p>
-                          <p className="text-[10px]">Nilai aset stok gudang terkini untuk keperluan audit keuangan.</p>
-                        </div>
-                     </div>
-                  </div>
-                </section>
+                   {/* SECTION B */}
+                   {includeAI && (
+                     <>
+                      <tr className="bg-gray-100 font-black">
+                        <td className="border border-black p-2 text-center text-xs">B</td>
+                        <td className="border border-black p-2 text-xs" colSpan={2}>ADVANCED AI ASSISTANCE</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-black p-2 text-center align-top">B.1</td>
+                        <td className="border border-black p-2 align-top font-bold">InkPOS Intelligent Engine</td>
+                        <td className="border border-black p-2 space-y-2">
+                           <div>
+                            <p className="font-black bg-gray-50 border-double border-b border-black/10 w-fit">Chat Dengan AI (InkPOS Assistant)</p>
+                            <p className="pl-2">- Monitoring Status Antrian via AI Agent</p>
+                            <p className="pl-2">- Quick Help: Info Stok & Laporan Penjualan</p>
+                            <p className="pl-2">- Integrasi n8n untuk Automasi Workflow</p>
+                          </div>
+                        </td>
+                      </tr>
+                     </>
+                   )}
+                   
+                   <tr className="bg-gray-100 font-black">
+                      <td className="border border-black p-2 text-center text-xs">{includeAI ? 'C' : 'B'}</td>
+                      <td className="border border-black p-2 text-xs" colSpan={2}>USER SECURITY & ACCESS</td>
+                   </tr>
+                   <tr>
+                     <td className="border border-black p-2 text-center align-top">{includeAI ? 'C.1' : 'B.1'}</td>
+                     <td className="border border-black p-2 align-top font-bold">Keamanan & Akses</td>
+                     <td className="border border-black p-2">
+                        <p className="pl-2">- Login System: Multi-Level User Rights</p>
+                        <p className="pl-2">- Otentikasi: Login Google & 2FA Security</p>
+                     </td>
+                   </tr>
+                 </tbody>
+               </table>
              </div>
           </div>
 
           <div className="print:break-before-page pt-10" />
 
-          {/* PAGE 4: COMMERCIAL TERMS */}
+          {/* PAGE 4: COMMERCIAL TERMS & MARKET ANALYSIS */}
           <div>
-            <h2 className="text-lg font-bold border-b-2 border-black pb-2 mb-6 uppercase tracking-widest">PERSYARATAN & SIMULASI BIAYA</h2>
+            <h2 className="text-lg font-bold border-b-2 border-black pb-2 mb-6 uppercase tracking-widest">PERSYARATAN & ANALISA BIAYA</h2>
             
+            <div className="mb-8 p-4 bg-gray-50 border-l-4 border-orange-400">
+               <h3 className="text-xs font-black uppercase mb-1">Market Analysis (Indonesia POS Standards):</h3>
+               <p className="text-[9px] leading-relaxed italic text-gray-600">
+                 Berdasarkan rata-rata industri IT di Indonesia, sistem POS Kustom dengan integrasi Inventory & Accounting biasanya dihargai antara <b>Rp 15jt - Rp 50jt</b>. Penawaran InkPOS ini mencakup harga kompetitif dengan fitur premium yang setara dengan sistem Enterprise.
+               </p>
+            </div>
+
             <div className="mb-10 space-y-2">
                <h3 className="font-bold underline uppercase">Terms & Condition :</h3>
                <ol className="list-decimal pl-5 space-y-1">
                  <li>Pembayaran biaya <b>Development 25%</b> di awal setelah detail pekerjaan disepakati.</li>
-                 <li>Waktu <b>Development</b> adalah 45 - 60 hari kerja.</li>
+                 <li>Waktu <b>Development</b> adalah {totalPrice > 20000000 ? '45 - 60' : '30 - 45'} hari kerja.</li>
                  <li>Waktu <b>UAT (User Acceptance Testing)</b> adalah 14 hari kerja.</li>
                  <li>Termasuk Maintenance & Bug Fix selama 3 bulan setelah Go-Live.</li>
                </ol>
@@ -180,43 +253,44 @@ const OfferingLetter = () => {
                <table className="w-full text-left border-collapse">
                  <thead className="bg-orange-100">
                     <tr>
-                      <th className="border-b border-black p-4 font-bold">TAHAP PEMBAYARAN</th>
-                      <th className="border-b border-black p-4 font-bold">PROGRES</th>
-                      <th className="border-b border-black p-4 font-bold">PERSENTASE</th>
-                      <th className="border-b border-black p-4 font-bold text-right">JUMLAH (IDR)</th>
+                      <th className="border-b border-black p-4 font-bold text-xs">TAHAP PEMBAYARAN</th>
+                      <th className="border-b border-black p-4 font-bold text-xs">PROGRES</th>
+                      <th className="border-b border-black p-4 font-bold text-xs">PERSENTASE</th>
+                      <th className="border-b border-black p-4 font-bold text-right text-xs">JUMLAH (IDR)</th>
                     </tr>
                  </thead>
                  <tbody className="divide-y divide-black/10">
                     <tr>
-                      <td className="p-4">Down Payment (DP)</td>
-                      <td className="p-4">0%</td>
-                      <td className="p-4">25%</td>
-                      <td className="p-4 text-right font-bold">{formatCurrency(6250000)}</td>
+                      <td className="p-4 text-xs font-bold">Down Payment (DP)</td>
+                      <td className="p-4 text-xs">0%</td>
+                      <td className="p-4 text-xs">25%</td>
+                      <td className="p-4 text-right font-bold text-xs">{formatCurrency(totalPrice * 0.25)}</td>
                     </tr>
                     <tr>
-                      <td className="p-4">Tahap 2 (Implementasi)</td>
-                      <td className="p-4">50%</td>
-                      <td className="p-4">25%</td>
-                      <td className="p-4 text-right font-bold">{formatCurrency(6250000)}</td>
+                      <td className="p-4 text-xs font-bold">Tahap 2 (Implementasi)</td>
+                      <td className="p-4 text-xs">50%</td>
+                      <td className="p-4 text-xs">25%</td>
+                      <td className="p-4 text-right font-bold text-xs">{formatCurrency(totalPrice * 0.25)}</td>
                     </tr>
                     <tr>
-                      <td className="p-4">Tahap 3 (Final & UAT)</td>
-                      <td className="p-4">100%</td>
-                      <td className="p-4">50%</td>
-                      <td className="p-4 text-right font-bold">{formatCurrency(12500000)}</td>
+                      <td className="p-4 text-xs font-bold">Tahap 3 (Final & UAT)</td>
+                      <td className="p-4 text-xs">100%</td>
+                      <td className="p-4 text-xs">50%</td>
+                      <td className="p-4 text-right font-bold text-xs">{formatCurrency(totalPrice * 0.5)}</td>
                     </tr>
                  </tbody>
                  <tfoot className="bg-black text-white">
                     <tr className="font-black">
-                      <td colSpan={3} className="p-4 text-right uppercase tracking-[0.2em]">Total Project Value</td>
-                      <td className="p-4 text-right text-lg">{formatCurrency(25000000)}</td>
+                      <td colSpan={3} className="p-4 text-right uppercase tracking-[0.2em] text-xs">Total Project Value</td>
+                      <td className="p-4 text-right text-sm">{formatCurrency(totalPrice)}</td>
                     </tr>
                  </tfoot>
                </table>
             </div>
 
-            <div className="mt-12 text-[10px] text-gray-400 italic">
-               * Penawaran ini berlaku selama 30 hari sejak tanggal diterbitkan. Harga dapat berubah sewaktu-waktu sesuai dengan penambahan request spesifik di luar modul standar yang ditawarkan.
+            <div className="mt-12 p-4 bg-gray-50 border border-gray-200 text-[10px] text-gray-500 italic space-y-2">
+               <div className="flex gap-2 items-start"><Info size={12} className="shrink-0 mt-0.5" /> <p>Penawaran ini mencakup modul terpilih: {includePrinting && 'Printing Engine, '}{includeAI && 'AI Assistant Assistance, '}serta Core POS & Inventory.</p></div>
+               <p>* Penawaran ini berlaku selama 30 hari sejak tanggal diterbitkan. Harga dapat berubah sewaktu-waktu sesuai dengan penambahan request spesifik di luar modul standar yang ditawarkan.</p>
             </div>
           </div>
 
