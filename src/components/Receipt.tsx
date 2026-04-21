@@ -22,9 +22,9 @@ export const Receipt = forwardRef<HTMLDivElement, ReceiptProps>(({
   return (
     <div ref={ref} className="p-8 bg-white text-black w-[80mm] mx-auto text-[12px] font-mono leading-tight">
       <div className="text-center mb-6">
-        <h1 className="text-xl font-bold tracking-tighter">INKPOS PRINTING</h1>
-        <p className="text-[10px] mt-1">Jl. Percetakan Modern No. 42</p>
-        <p className="text-[10px]">Telp: 021-555-1234</p>
+        <h1 className="text-xl font-bold tracking-tighter">Grafika Aksara Semesta</h1>
+        <p className="text-[10px] mt-1">Jl. Alamanda Utara 14 No.33, Bekasi Kabupaten, 17510, ID</p>
+        {/* <p className="text-[10px]">Telp: 021-555-1234</p> */}
       </div>
 
       <div className="border-t border-b border-black border-dashed py-2 mb-4 space-y-1">

@@ -60,8 +60,8 @@ const Layout = () => {
       title: 'Master Data',
       icon: Database,
       items: [
-        { title: 'Queue Services', path: '/master/queue-services', icon: Layers },
-        { title: 'Step Templates', path: '/master/step-templates', icon: List },
+        // { title: 'Queue Services', path: '/master/queue-services', icon: Layers },
+        // { title: 'Step Templates', path: '/master/step-templates', icon: List },
         { title: 'Document Numbering', path: '/master/doc-numbering', icon: undefined },
         { title: 'Products', path: '/master/products', icon: FileText },
         { title: 'Product Categories', path: '/master/categories', icon: FileText },
@@ -70,20 +70,20 @@ const Layout = () => {
         { title: 'Customers', path: '/master/customers', icon: FileText },
       ]
     },
-    {
-      id: 'queue',
-      title: 'Queue Management',
-      icon: MousePointer2,
-      items: [
-        { title: 'Manage Queue', path: '/queue/manage', icon: FileText },
-        { title: 'Queue Display', path: '/queue/display', icon: Monitor },
-      ]
-    },
+    // {
+    //   id: 'queue',
+    //   title: 'Queue Management',
+    //   icon: MousePointer2,
+    //   items: [
+    //     { title: 'Manage Queue', path: '/queue/manage', icon: FileText },
+    //     { title: 'Queue Display', path: '/queue/display', icon: Monitor },
+    //   ]
+    // },
     {
       id: 'transactions',
       items: [
         { title: 'Purchase Orders', path: '/transactions/purchase-orders', icon: FileText },
-        { title: 'Refunds', path: '/transactions/refunds', icon: FileText },
+        // { title: 'Refunds', path: '/transactions/refunds', icon: FileText },
         { title: 'Stock Opname', path: '/transactions/stock-opname', icon: ClipboardCheck },
         { title: 'Stock Transfers', path: '/transactions/stock-transfers', icon: Layers },
         { title: 'Orders', path: '/transactions/orders', icon: FileText },
@@ -96,10 +96,10 @@ const Layout = () => {
       title: 'Accounting',
       icon: BarChart2,
       items: [
-        { title: 'Cashier Shifts', path: '/accounting/shifts', icon: Clock },
-        { title: 'Cash Flow', path: '/accounting/cash-flow', icon: FileText },
-        { title: 'Vouchers', path: '/accounting/vouchers', icon: FileText },
-        { title: 'Payment Methods', path: '/accounting/payments', icon: FileText },
+        // { title: 'Cashier Shifts', path: '/accounting/shifts', icon: Clock },
+        // { title: 'Cash Flow', path: '/accounting/cash-flow', icon: FileText },
+        // { title: 'Vouchers', path: '/accounting/vouchers', icon: FileText },
+        // { title: 'Payment Methods', path: '/accounting/payments', icon: FileText },
         { title: 'Profit & Loss', path: '/accounting/profit-loss', icon: BarChart2 },
         { title: 'Inventory Value', path: '/accounting/inventory', icon: Package },
       ]

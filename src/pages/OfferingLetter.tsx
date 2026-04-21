@@ -92,13 +92,14 @@ const OfferingLetter = () => {
             <div className="mb-8 space-y-1">
               <p>Kepada Yth,</p>
               <p className="font-bold">Bapak/Ibu Pimpinan Utama</p>
-              <p>Calon Mitra Strategis InkPOS</p>
-              <p>Jl. Bisnis Modern No. 88</p>
-              <p>Bekasi, Jawa Barat</p>
+              <p>Bpk Giharto</p>
+              <p>Grafika Aksara Semesta</p>
+              <p>Jl. Alamanda Utara 14 No.33,</p>
+              <p>Bekasi Kabupaten, 17510, ID</p>
             </div>
 
             <div className="mb-8 font-bold italic">
-              <p>Perihal : Pengembangan Sistem InkPOS (Point of Sale & Printing Management)</p>
+              <p>Perihal : Pengembangan Sistem InkPOS (Point of Sales)</p>
             </div>
 
             <div className="space-y-4 mb-12">
@@ -120,8 +121,8 @@ const OfferingLetter = () => {
             <div className="mt-20">
               <p>Hormat kami,</p>
               <div className="h-24" />
-              <p className="font-bold border-b border-black w-fit">Arman Septian</p>
-              <p className="italic text-xs">Product Development Head - InkPOS</p>
+              <p className="font-bold border-b border-black w-fit">Choirul Iqbal Nuril Ilahi</p>
+              <p className="italic text-xs">Product Development Head - POS</p>
             </div>
           </div>
 
