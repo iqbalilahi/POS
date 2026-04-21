@@ -7,15 +7,16 @@ const OfferingLetter = () => {
   const printRef = useRef<HTMLDivElement>(null);
   
   // State for feature toggles
-  const [includePrinting, setIncludePrinting] = useState(true);
-  const [includeAI, setIncludeAI] = useState(false);
+  // const [includePrinting, setIncludePrinting] = useState(false);
+  // const [includeAI, setIncludeAI] = useState(false);
 
   // Pricing Logic
   const basePrice = 15000000;
   const printingAddonPrice = 5000000;
   const aiAddonPrice = 5000000;
 
-  const totalPrice = basePrice + (includePrinting ? printingAddonPrice : 0) + (includeAI ? aiAddonPrice : 0);
+  const totalPrice = basePrice;
+  // const totalPrice = basePrice + (includePrinting ? printingAddonPrice : 0) + (includeAI ? aiAddonPrice : 0);
 
   const handlePrint = useReactToPrint({
     contentRef: printRef,
@@ -33,7 +34,7 @@ const OfferingLetter = () => {
           <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">InkPOS Commercial Proposal</p>
         </div>
         
-        <div className="flex flex-wrap items-center gap-4 border-l-0 lg:border-l border-gray-100 dark:border-gray-800 lg:pl-6">
+        {/* <div className="flex flex-wrap items-center gap-4 border-l-0 lg:border-l border-gray-100 dark:border-gray-800 lg:pl-6">
            <p className="text-[9px] font-black uppercase text-gray-400 tracking-widest w-full lg:w-auto">Package Config:</p>
            <button 
              onClick={() => setIncludePrinting(!includePrinting)}
@@ -49,7 +50,7 @@ const OfferingLetter = () => {
              {includeAI ? <CheckSquare size={14} /> : <Square size={14} />}
              AI Assistance
            </button>
-        </div>
+        </div> */}
 
         <div className="flex items-center gap-4 ml-auto">
           <div className="text-right">
@@ -111,7 +112,7 @@ const OfferingLetter = () => {
                 InkPOS dirancang khusus untuk memenuhi kebutuhan bisnis percetakan dan retail modern yang membutuhkan integrasi stock, antrian produksi, dan laporan keuangan dalam satu dashboard yang intuitif. Detail teknis dan penawaran finansial kami sampaikan pada halaman-halaman berikutnya.
               </p>
               <p>
-                Besar harapan kami agar penawaran ini dapat disetujui untuk meningkatkan efisiensi operasional bisnis Anda. Jika terdapat pertanyaan lebih lanjut, silakan menghubungi kami di nomor <b>0895 1722 7009</b>.
+                Besar harapan kami agar penawaran ini dapat disetujui untuk meningkatkan efisiensi operasional bisnis Anda. Jika terdapat pertanyaan lebih lanjut, silakan menghubungi kami di nomor <b>0896 3524 4513</b>.
               </p>
               <p>
                 Demikian surat penawaran ini kami sampaikan. Terimakasih atas perhatian dan kerjasamanya.
@@ -161,13 +162,13 @@ const OfferingLetter = () => {
                          <p className="pl-2">- Master Satuan (UoM) & Gudang</p>
                          <p className="pl-2">- Migrasi Data dari Excel / Sistem Lama</p>
                        </div>
-                       {includePrinting && (
+                       {/* {includePrinting && (
                         <div>
                           <p className="font-black bg-gray-50 border-double border-b border-black/10 w-fit">Master Antrian Produksi</p>
                           <p className="pl-2">- Mapping Urutan Produksi (Step Templates)</p>
                           <p className="pl-2">- Layanan Antrian (Express/Standard)</p>
                         </div>
-                       )}
+                       )} */}
                      </td>
                    </tr>
                    <tr>
@@ -189,7 +190,7 @@ const OfferingLetter = () => {
                    </tr>
 
                    {/* SECTION B */}
-                   {includeAI && (
+                   {/* {includeAI && (
                      <>
                       <tr className="bg-gray-100 font-black">
                         <td className="border border-black p-2 text-center text-xs">B</td>
@@ -208,9 +209,9 @@ const OfferingLetter = () => {
                         </td>
                       </tr>
                      </>
-                   )}
+                   )} */}
                    
-                   <tr className="bg-gray-100 font-black">
+                   {/* <tr className="bg-gray-100 font-black">
                       <td className="border border-black p-2 text-center text-xs">{includeAI ? 'C' : 'B'}</td>
                       <td className="border border-black p-2 text-xs" colSpan={2}>USER SECURITY & ACCESS</td>
                    </tr>
@@ -221,7 +222,7 @@ const OfferingLetter = () => {
                         <p className="pl-2">- Login System: Multi-Level User Rights</p>
                         <p className="pl-2">- Otentikasi: Login Google & 2FA Security</p>
                      </td>
-                   </tr>
+                   </tr> */}
                  </tbody>
                </table>
              </div>
@@ -290,7 +291,7 @@ const OfferingLetter = () => {
             </div>
 
             <div className="mt-12 p-4 bg-gray-50 border border-gray-200 text-[10px] text-gray-500 italic space-y-2">
-               <div className="flex gap-2 items-start"><Info size={12} className="shrink-0 mt-0.5" /> <p>Penawaran ini mencakup modul terpilih: {includePrinting && 'Printing Engine, '}{includeAI && 'AI Assistant Assistance, '}serta Core POS & Inventory.</p></div>
+               {/* <div className="flex gap-2 items-start"><Info size={12} className="shrink-0 mt-0.5" /> <p>Penawaran ini mencakup modul terpilih: {includePrinting && 'Printing Engine, '}{includeAI && 'AI Assistant Assistance, '}serta Core POS & Inventory.</p></div> */}
                <p>* Penawaran ini berlaku selama 30 hari sejak tanggal diterbitkan. Harga dapat berubah sewaktu-waktu sesuai dengan penambahan request spesifik di luar modul standar yang ditawarkan.</p>
             </div>
           </div>
@@ -298,12 +299,12 @@ const OfferingLetter = () => {
           {/* Footer Contact Info */}
           <div className="absolute bottom-[10mm] left-[20mm] right-[20mm] flex justify-between items-center text-[10px] text-gray-500 border-t border-gray-100 pt-4 print:fixed print:bottom-10">
             <div className="flex gap-4">
-              <span className="flex items-center gap-1"><Phone size={10}/> 0895 1722 7009</span>
-              <span className="flex items-center gap-1"><Mail size={10}/> support@inkpos.id</span>
+              <span className="flex items-center gap-1"><Phone size={10}/> 089635244513</span>
+              <span className="flex items-center gap-1"><Mail size={10}/> iqbalilahi7@gmail.com</span>
             </div>
-            <div className="flex items-center gap-1">
+            {/* <div className="flex items-center gap-1">
               <MapPin size={10}/> Centennial Tower, 29th Floor, Jakarta Selatan
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
